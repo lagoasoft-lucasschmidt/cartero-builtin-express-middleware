@@ -1,0 +1,37 @@
+{
+  "name": "cartero-builtin-express-middleware",
+  "version": "0.0.1",
+  "description": "Cartero middleware for express that starts cartero for each view.",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/lucastschmidt/cartero-builtin-express-middleware"
+  },
+  "keywords": [
+    "cartero",
+    "express",
+    "middleware"
+  ],
+  "author": "Lucas Schmidt",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lucastschmidt/cartero-builtin-express-middleware/issues"
+  },
+  "homepage": "https://github.com/lucastschmidt/cartero-builtin-express-middleware",
+  "dependencies": {
+    "cartero": "^3.0.1",
+    "cartero-node-hook": "^1.0.0",
+    "lodash": "^2.4.1",
+    "mkdirp": "^0.5.0",
+    "node-uuid": "^1.4.1",
+    "url-join": "0.0.1"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-coffee": "^0.10.1"
+  }
+}
