@@ -19,6 +19,10 @@ This was done to improve build performance in the development phase. In theory, 
 - carteroOptions
   + options to be given to cartero, based on ``cartero api``. See [cartero](https://github.com/rotundasoftware/cartero)
 
+# Install
+
+``npm install cartero-builtin-express-middleware --save``
+
 # Example
 
 ```
@@ -40,3 +44,6 @@ app.use require('cartero-builtin-express-middleware')
       return pkgJson
 ...
 ```
+
+# Problems
+- If you try to open the same page at the same time, if cartero did not init for that page, it may init multiple times.
