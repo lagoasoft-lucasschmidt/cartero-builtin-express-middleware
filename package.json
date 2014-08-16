@@ -1,6 +1,6 @@
 {
   "name": "cartero-builtin-express-middleware",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Cartero middleware for express that starts cartero for each view.",
   "main": "lib/index.js",
   "scripts": {

@@ -18,6 +18,7 @@ This was done to improve build performance in the development phase. In theory, 
   + the actual path to the output directory
 - carteroOptions
   + options to be given to cartero, based on ``cartero api``. See [cartero](https://github.com/rotundasoftware/cartero)
+  + *be aware, if you use ``packageTransform``, instead of passing a Function, you must pass a path to be required*
 
 # Install
 
@@ -36,14 +37,27 @@ app.use require('cartero-builtin-express-middleware')
   outputDirPath: assetsDir
   carteroOptions:
     watch: true
-    appTransforms: ["browserify-plain-jade", "coffeeify", "browserify-shim", "less-css-stream"]
-    appTransformDirs:[process.cwd()]
+    appTransforms: [
+      "browserify-plain-jade",
+      "coffeeify",
+      "browserify-shim",
+      "less-css-stream"
+    ]
+    appTransformDirs:[
+      process.cwd(),
+      path.resolve(process.cwd(), 'node_modules')
+    ]
     sourceMaps: false
-    packageTransform: (pkgJson, pkgPath)->
-      pkgJson["browserify-shim"] = pkg["browserify-shim"] if pkg["browserify-shim"]
-      return pkgJson
+    packageTransform: path.resolve __dirname, './myTransform'
 ...
 ```
+
+# Changes History
+
+- 0.0.2
+  + Added support for *packageTransform*
+- 0.0.1
+  + First release
 
 # Problems
 - If you try to open the same page at the same time, if cartero did not init for that page, it may init multiple times.

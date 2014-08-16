@@ -21,6 +21,10 @@ createCarteroHook = (parcelPath, givenHookOptions, callback)->
 
   c = cp.fork path.resolve(__dirname, './cartero'), {cwd: process.cwd()}
 
+  if carteroOptions?.appTransforms?.length
+    carteroOptions.appTransformDirs = carteroOptions.appTransformDirs or []
+    carteroOptions.appTransformDirs.push parcelsDir
+
   c.send
     carteroOptions: carteroOptions
     parcelsDir: parcelsDir

@@ -5,6 +5,9 @@ process.on "message", (options)->
   parcelsDir = options?.parcelsDir
   outputDirPath = options?.outputDirPath
 
+  if carteroOptions.packageTransform?.length
+    carteroOptions.packageTransform = require carteroOptions.packageTransform
+
   c = cartero(parcelsDir, outputDirPath, carteroOptions)
   c.on "done", ->
     process.send status: "OK"
