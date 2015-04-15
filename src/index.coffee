@@ -1,6 +1,5 @@
 fs = require("fs")
 path = require("path")
-hookCreator = require('./hookCreator')
 
 module.exports = (hookOptions, opts) ->
 
@@ -8,6 +7,7 @@ module.exports = (hookOptions, opts) ->
   # first to populate the `cartero_js`, `cartero_css`
 
   populateRes = require('./populateResDefault')  if typeof (opts?.populateRes) isnt "function"
+  hookCreator = require('./hookCreator')()
 
   return (req, res, next) ->
     oldRender = res.render

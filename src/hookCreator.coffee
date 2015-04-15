@@ -5,7 +5,6 @@ cp = require 'child_process'
 uuid = require 'node-uuid'
 urljoin = require 'url-join'
 _ = require 'lodash'
-findAbsoluteViewPath = require './findAbsoluteViewPath'
 
 carteroHookCache = {}
 
@@ -40,15 +39,18 @@ createCarteroHook = (parcelPath, givenHookOptions, callback)->
       outputDirUrl: hookOptions.outputDirUrl
     callback null, hook
 
-module.exports = getCarteroHook = (viewName, app, hookOptions, callback)->
-  findAbsoluteViewPath viewName, app, (err, absoluteViewPath)->
-    if err then return callback err
-    parcelPath = path.resolve(absoluteViewPath, "..")
+module.exports = ()->
+  findAbsoluteViewPath = require('./findAbsoluteViewPath')()
 
-    if carteroHookCache[parcelPath]
-      callback null, carteroHookCache[parcelPath], parcelPath
-    else
-      createCarteroHook parcelPath, hookOptions, (error, c)->
-        if error then return callback(error)
-        carteroHookCache[parcelPath] = c
-        callback null, c, parcelPath
+  return (viewName, app, hookOptions, callback)->
+    findAbsoluteViewPath viewName, app, (err, absoluteViewPath)->
+      if err then return callback err
+      parcelPath = path.resolve(absoluteViewPath, "..")
+
+      if carteroHookCache[parcelPath]
+        callback null, carteroHookCache[parcelPath], parcelPath
+      else
+        createCarteroHook parcelPath, hookOptions, (error, c)->
+          if error then return callback(error)
+          carteroHookCache[parcelPath] = c
+          callback null, c, parcelPath

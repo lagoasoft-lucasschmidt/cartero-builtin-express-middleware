@@ -1,14 +1,14 @@
 path = require 'path'
 isFile = require './isFile'
 
-cache = {}
-
-module.exports = (viewName, app, callback)->
-  if cache[viewName] then return callback null, cache[viewName]
-  else findAbsoluteViewPath viewName, app, (err, viewPath)->
-    if err then return callback err
-    cache[viewName] = viewPath
-    callback null, viewPath
+module.exports = ()->
+  cache = {}
+  return (viewName, app, callback)->
+    if cache[viewName] then return callback null, cache[viewName]
+    else findAbsoluteViewPath viewName, app, (err, viewPath)->
+      if err then return callback err
+      cache[viewName] = viewPath
+      callback null, viewPath
 
 findAbsoluteViewPath = (viewName, app, callback) ->
 
